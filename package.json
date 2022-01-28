@@ -1,10 +1,11 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "energi-blockchain",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A simple React web application built with Gatsby, Material UI that connects to either Ethereum blockchains using Web3 library, and displays the latest: ● Block number, ● Number of transactions, ● Miner (address that mined the block), ● Total difficulty.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Uchenna Egbo <egbouchenna001@gmail.com>",
   "dependencies": {
+    "electron": "^16.0.7",
     "gatsby": "^4.6.0",
     "gatsby-plugin-gatsby-cloud": "^4.6.0",
     "gatsby-plugin-image": "^2.6.0",
@@ -17,7 +18,11 @@
     "prop-types": "^15.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0",
+    "web3": "^1.7.0"
   },
   "devDependencies": {
     "prettier": "^2.5.1"
