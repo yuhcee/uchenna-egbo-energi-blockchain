@@ -13,7 +13,7 @@ const Header = ({ siteTitle }) => (
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
+        maxWidth: 1350,
       }}
     >
       <Link
@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => (
           quality={95}
           formats={["auto", "webp", "avif"]}
           alt="Energi Logo"
-          style={{ verticalAlign: "baseline" }}
+          style={{ verticalAlign: "baseline"}}
         />
         {/* {siteTitle} */}
       </Link>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Web3 from "web3"
 import { numberWithCommas, timeStampToSeconds } from "../utils"
-// import { timeStampToSeconds } from '../utils/formatToSeconds'
 
 export const TransactionContext = React.createContext()
 const { ethereum } = window
@@ -46,15 +45,15 @@ export const TransactionProvider = ({ children }) => {
     }
   }
 
-  const getEthStats = async () => {
+  const getEthStats = async currentBlock => {
     try {
       if (!ethereum) {
         return alert("Please install Metamask")
       }
-
-      const currentBlock = await web3Instance.eth.getBlock("latest", true)
+      if (!currentBlock) {
+        console.log("No block object received")
+      }
       //   console.log(currentBlock)
-
       if (currentBlock.number !== null) {
         //only when block is mined not pending
         const previousBlock = await web3Instance.eth.getBlock(
@@ -65,7 +64,8 @@ export const TransactionProvider = ({ children }) => {
           const miner = currentBlock.miner
           const totalDifficulty = numberWithCommas(currentBlock.totalDifficulty)
           const transactionCount = currentBlock.transactions.length
-          const tps = transactionCount / timeTaken
+          const transactions = currentBlock.transactions
+          //   const tps = transactionCount / timeTaken
           const timestamp = timeStampToSeconds(currentBlock.timestamp)
 
           setEthStats(ethStats => [
@@ -76,38 +76,17 @@ export const TransactionProvider = ({ children }) => {
               transactionCount,
               miner,
               totalDifficulty,
+              transactions,
               timeTaken,
-              tps,
             },
           ])
         }
       }
-
     } catch (error) {
       console.log(error)
       throw new Error("No ethereum object.")
     }
   }
-
-  //   const printStats = async () => {
-  //     const stats = await getEthStats()
-  //     if (stats !== null) {
-  //       const {
-  //         currentBlockNumber,
-  //         timestamp,
-  //         transactionCount,
-  //         timeTaken,
-  //         tps,
-  //         totalDifficulty,
-  //       } = stats
-  //       console.log(
-  //         `Current Block (#${currentBlockNumber}) : ${timestamp} seconds ago:
-  //         ${transactionCount} txns in ${timeTaken} seconds at the rate of ${tps} transactions/seconds.
-  //         Total Difficulty of ${totalDifficulty}`
-  //       )
-  //     }
-  //   }
-  //   printStats()
 
   useEffect(() => {
     checkIfWalletIsConnected()
