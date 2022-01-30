@@ -19,21 +19,23 @@ const web3Instance = new Web3(Web3.givenProvider || ethereum)
 const ConnectEth = () => {
   const { connectWallet, connectedAccount, getEthStats } =
     React.useContext(TransactionContext)
-  const [currentBlockNumber, setCurrentBlockNumber] = useState(0)
-  const [isRequesting, setIsRequesting] = useState(false)
+  const [currentBlock, setCurrentBlock] = useState({})
+  const [isRequesting, setIsRequesting] = useState(true)
+  let [delay, setDelay] = useState(5000)
 
-  useInterval(async () => {
-    let currentBlock = await web3Instance.eth.getBlock("latest", true)
-    if (currentBlock.number === currentBlockNumber.number) return
-    if (!isRequesting && currentBlock.number !== currentBlockNumber.number) {
-      setCurrentBlockNumber(currentBlock)
-    }
-    return
-  }, 5000)
+  useInterval(
+    async () => {
+      let block = await web3Instance.eth.getBlock("latest", true)
+      if (block.number !== currentBlock.number) {
+        return setCurrentBlock(block)
+      }
+    },
+    isRequesting ? delay : null
+  )
 
   useEffect(() => {
-    if (!isRequesting && currentBlockNumber) getEthStats(currentBlockNumber)
-  }, [currentBlockNumber, isRequesting])
+    getEthStats(currentBlock)
+  }, [currentBlock])
 
   return (
     <div style={{ width: "100%", marginTop: `20px` }}>
@@ -55,16 +57,16 @@ const ConnectEth = () => {
             buttonText={"Connect Wallet"}
           />
         )}
-        {connectedAccount && (
+        {
           <ButtonComp
             variant={"contained"}
-            endIcon={isRequesting ? <SendIcon /> : <PauseCircleFilledIcon />}
+            endIcon={!isRequesting ? <SendIcon /> : <PauseCircleFilledIcon />}
             handleClick={() => {
               setIsRequesting(prev => !prev)
             }}
-            buttonText={isRequesting ? "Resume Requests" : "Pause Requests"}
+            buttonText={!isRequesting ? "Resume Requests" : "Pause Requests"}
           />
-        )}
+        }
 
         {connectedAccount && (
           <Paper elevation={2} style={{ padding: `7px 4px` }}>
