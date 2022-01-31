@@ -1,7 +1,7 @@
 {
   "name": "energi-blockchain",
   "private": true,
-  "description": "A simple React web application built with Gatsby, Material UI that connects to either Ethereum blockchains using Web3 library, and displays the latest: ● Block number, ● Number of transactions, ● Miner (address that mined the block), ● Total difficulty.",
+  "description": "A simple React web application built with Gatsby, Material UI that connects to Ethereum blockchain using Web3 library, and displays the latest: ● Block number, ● Number of transactions, ● Miner (address that mined the block), ● Total difficulty.",
   "version": "0.1.0",
   "author": "Uchenna Egbo <egbouchenna001@gmail.com>",
   "dependencies": {
