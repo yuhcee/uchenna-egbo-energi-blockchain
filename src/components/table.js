@@ -24,7 +24,13 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
   }
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden", marginTop: `20px` }}>
+    <Paper
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        marginTop: `20px`,
+      }}
+    >
       <h3 style={{ width: `100%`, padding: `6px 15px` }}>
         {tableTitle}
         <hr
@@ -45,7 +51,7 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  <strong>{column.label}</strong>
                 </TableCell>
               ))}
             </TableRow>
@@ -53,14 +59,9 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(row => {
+              .map((row, index) => {
                 return (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row.currentBlockNumber}
-                  >
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map(column => {
                       const value = row[column.id]
                       return (

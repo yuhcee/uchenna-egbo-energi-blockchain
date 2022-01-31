@@ -63,6 +63,7 @@ const ConnectEth = () => {
             endIcon={!isRequesting ? <SendIcon /> : <PauseCircleFilledIcon />}
             handleClick={() => {
               setIsRequesting(prev => !prev)
+              setDelay(5000)
             }}
             buttonText={!isRequesting ? "Resume Requests" : "Pause Requests"}
           />

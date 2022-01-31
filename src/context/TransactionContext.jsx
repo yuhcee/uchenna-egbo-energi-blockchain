@@ -50,7 +50,7 @@ export const TransactionProvider = ({ children }) => {
       if (!ethereum) {
         return alert("Please install Metamask")
       }
-      if (!currentBlock) {
+      if (currentBlock === null || currentBlock === undefined) {
         console.log("No block object received")
       }
       //   console.log(currentBlock)
@@ -82,9 +82,10 @@ export const TransactionProvider = ({ children }) => {
           ])
         }
       }
+      return
     } catch (error) {
       console.log(error)
-      throw new Error("No ethereum object.")
+      // throw new Error("No ethereum object.")
     }
   }
 
