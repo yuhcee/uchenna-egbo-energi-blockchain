@@ -1,14 +1,5 @@
 const webpack = require("webpack");
 
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
-  })
-}
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -26,8 +17,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
               "util": false,
               "http": false,
               "https": false,
-              "os": false
+              "os": false,
           },
       },
+      
   })
 }
