@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react"
-import Web3 from "web3"
+import { Helmet } from "react-helmet"
 import { numberWithCommas, timeStampToSeconds } from "../utils"
 
 export const TransactionContext = React.createContext()
-const { ethereum } = window
-const web3Instance = new Web3(Web3.givenProvider || ethereum)
 
 export const TransactionProvider = ({ children }) => {
   const [connectedAccount, setConnectedAccount] = useState("")
   const [ethStats, setEthStats] = useState([])
+  const isBrowser = typeof window !== "undefined"
 
   const checkIfWalletIsConnected = async () => {
     try {
+      const { ethereum } = window
+
       if (!ethereum) {
         return alert("Please install Metamask")
       }
@@ -31,6 +32,8 @@ export const TransactionProvider = ({ children }) => {
 
   const connectWallet = async () => {
     try {
+      const { ethereum } = window
+
       if (!ethereum) {
         return alert("Please install Metamask")
       }
@@ -47,13 +50,15 @@ export const TransactionProvider = ({ children }) => {
 
   const getEthStats = async currentBlock => {
     try {
+      const { ethereum } = window
+      const web3Instance = new window.Web3(window.Web3.givenProvider || ethereum)
+
       if (!ethereum) {
         return alert("Please install Metamask")
       }
       if (currentBlock === null || currentBlock === undefined) {
         console.log("No block object received")
       }
-      //   console.log(currentBlock)
       if (currentBlock.number !== null) {
         //only when block is mined not pending
         const previousBlock = await web3Instance.eth.getBlock(
@@ -94,10 +99,21 @@ export const TransactionProvider = ({ children }) => {
   }, [])
 
   return (
-    <TransactionContext.Provider
-      value={{ connectWallet, connectedAccount, getEthStats, ethStats }}
-    >
-      {children}
-    </TransactionContext.Provider>
+    <div>
+      <Helmet>
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"
+        />
+      </Helmet>
+
+      {isBrowser && (
+        <TransactionContext.Provider
+          value={{ connectWallet, connectedAccount, getEthStats, ethStats }}
+        >
+          {children}
+        </TransactionContext.Provider>
+      )}
+    </div>
   )
 }
