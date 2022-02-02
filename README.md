@@ -8,11 +8,9 @@ A simple React web application built with Gatsby, Material UI that connects to E
 - Total difficulty,
 - Lists all the latest transactions...
 
-[Link to live project.](https://www.)
+[Link to live project.](https://energi-blockchain-explorer.netlify.app/)
 
 ### Homepage :
-
-<!-- ![The Energi Blockchain Explorer](https://github.com/yuhcee/uchenna-egbo-energi-blockchain/blob/master/src/images/the-energi-blockchain_explorer.png?raw=true) -->
 
 ![The Energi Blockchain Explorer](src/images/the-energi-blockchain_explorer.png?raw=true)
 
@@ -21,7 +19,7 @@ A simple React web application built with Gatsby, Material UI that connects to E
 This was a fun project to build as it afforded me the opportunity to extensively work and interact with Ethereum Blockchain APIs using web3Js, React and Metamask. However, I encountered some unique runtime or development bugs relating to either Metamask, web3 and/or Ethereum blockchain that is not so intuitively solved, and any solutions could harldy be found anywhere online.
 <br>
 
-## What I hope to improve
+## What I hope to improve.
 
 - Make displayed data more descriptive.
 - Truncate long hashes - expand on click.
