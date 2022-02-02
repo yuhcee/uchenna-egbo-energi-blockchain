@@ -31,7 +31,7 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
         marginTop: `20px`,
       }}
     >
-      <h3 style={{ width: `100%`, padding: `6px 15px` }}>
+      <h3 style={{ width: `100%`, padding: `6px 15px`, color: `#03e775` }}>
         {tableTitle}
         <hr
           style={{
@@ -58,8 +58,8 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
           </TableHead>
           <TableBody>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ?.map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map(column => {
@@ -81,7 +81,7 @@ export default function StickyHeadTable({ tableTitle, tableHead, tableData }) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={rows?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

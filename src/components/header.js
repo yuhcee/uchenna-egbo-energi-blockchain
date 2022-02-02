@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => (
           quality={95}
           formats={["auto", "webp", "avif"]}
           alt="Energi Logo"
-          style={{ verticalAlign: "baseline"}}
+          style={{ verticalAlign: "middle" }}
         />
         {/* {siteTitle} */}
       </Link>

@@ -4,11 +4,12 @@ import { latestBlockHeaders, latestTransactionsHeaders } from "../utils/data"
 import { TransactionContext } from "../context/TransactionContext"
 
 const TransactionTable = () => {
-  const { ethStats } = React.useContext(TransactionContext)
+  const txContext = React.useContext(TransactionContext)
+  const ethStats = txContext?.ethStats
 
   const getAllTransactions = () => {
     let allTransactions = []
-    if (ethStats.length) {
+    if (ethStats?.length) {
       for (let { transactions } of ethStats) {
         if (transactions.length) {
           allTransactions = [...allTransactions, ...transactions]
@@ -18,7 +19,6 @@ const TransactionTable = () => {
     }
     return allTransactions
   }
-  //
   const latestTransactions = getAllTransactions()
 
   return (

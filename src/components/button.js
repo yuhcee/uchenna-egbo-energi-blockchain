@@ -10,6 +10,12 @@ const ButtonComp = ({
 }) => {
   return (
     <Button
+      sx={{
+        color: `#03e775`,
+        background: `#060e09`,
+        fontFamily: `Avenir`,
+        lineHeight: `normal`,
+      }}
       variant={variant}
       startIcon={startIcon && startIcon}
       endIcon={endIcon && endIcon}
